@@ -1,0 +1,67 @@
+/* Subscribe.css */
+
+.main{
+    margin-top: 150px;
+    margin-left: 600px;
+    
+}
+
+.subscription-box{
+    
+    background-color:white;
+    border-radius: 2px black;
+    margin-right: 650px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container {
+    margin-bottom: 15px;
+    margin-top: 20px;
+  }
+  
+  .input-container input {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .input-container input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+.payment-details{
+    margin-top: 20px;
+    
+}
+
+.payment-details button{
+    margin-top: 20px;
+    margin-left: 90px;
+    border-radius: 10px;
+    height: 40px;
+    width:120px;
+    
+}
+
+.payment-details button:hover{
+    background-color: rgb(8, 255, 8);
+    
+}
+
+.freeTrail button{
+  margin-top: 20px;
+    margin-left: 60px;
+    border-radius: 10px;
+    height: 40px;
+    width:140px;
+}
+
+.freeTrail button:hover{
+  background-color: rgb(8, 255, 8);
+}

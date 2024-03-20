@@ -1,0 +1,105 @@
+.admin-container {
+    
+    padding: 20px;
+  }
+  .label{
+    margin-left: 705px;
+    font-weight: bolder;
+    color: blue;
+  }
+  .user-data button{
+    font-weight: bolder;
+  }
+  .user-data button:hover{
+    background-color: aqua;
+  }
+  .table-container{
+    max-height: 290px;
+    overflow-y: auto;
+  }
+  .error{
+    margin-top: 60px;
+    margin-left: 500px;
+    font-weight: bolder;
+    color: red;
+  }
+  .manipulation{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+  }
+  .button{
+    margin-top: -5px;
+    margin-left:550px;
+    font-weight: bolder;
+  }
+  .button:hover{
+    background-color: #3eef91;
+  }
+  .search{
+    display: flex;
+    margin-left:400px;
+  }
+  .search-field{
+    margin-left: 8px;
+    width: 300px;
+    border-radius: 20px;
+  }
+  .header{
+    background-color: aqua;
+    display: flex;
+    padding: 20px;
+  }
+  .element{
+    margin-left:698px;
+    font-weight: bolder;
+  }
+  .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    table-layout: inherit;
+  }
+  .admin-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 1; 
+    background-color: #f2f2f2; 
+  }
+  .user-data{
+    margin-top: 30px;
+  }
+  
+  .admin-table th,
+  .admin-table td {
+    padding: 10px;
+    text-align: left;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    height: 60px;
+    
+  }
+  .select{
+    margin-left: 60px;
+  }
+  .admin-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .admin-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .admin-table tbody tr:hover {
+    background-color: #ddd;
+  }
+
+  .tablecontainer1{
+    width:800px; 
+  }
+  .searchData{
+    display: flex;
+    margin-left: 150px;
+    margin-top: 30px;
+  }

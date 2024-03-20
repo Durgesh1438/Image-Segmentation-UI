@@ -1,0 +1,236 @@
+.choose {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 1rem;
+}
+.choose .snapshot {
+    width: 150px;
+}
+.media-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 1rem;
+}
+.media-wrapper .media-upload-wrapper {
+    border: 1px solid #ddd;
+    width: 400px;
+}
+.media-wrapper .media-upload-wrapper h5 {
+    width: 100%;
+    text-align: center;
+}
+.webcam-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.webcam-wrapper .take-screenshot {
+    margin-top: -3.5rem;
+}
+.snapshot {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    margin: 1rem;
+
+}
+.snapshot:hover .hover-upload {
+    display: flex;
+    height: 100%;
+    margin: 0;
+    align-items: center;
+    width: 100%;
+    border-radius: 0;
+    justify-content: center;
+    color: white;
+}
+.snapshot:first-of-type {
+    margin-top: 0;
+}
+.snapshot .hover-upload {
+    font-size: 12px;
+    margin: 1rem;
+    position: absolute;
+    display: none;
+}
+.snapshot .mat-mdc-card-header {
+    padding: 1rem;
+}
+.snapshot .snapshot-title {
+    text-align: left;
+    width: 100%;
+    font-size: 12px;
+    font-weight: 500;
+}
+.snapshot .choose-camera {
+    width: 150px;
+    height: 50px;
+    justify-self: stretch;
+    align-self: stretch;
+}
+.snapshot .big-icon {
+    margin: 0;
+    font-size: 1.5rem;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+.reports {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 1rem;
+    gap: 1rem;
+}
+.align-left {
+    display: flex;
+    justify-content: flex-start;
+}
+.thumbnail {
+    width: 450px;
+    height: auto;
+}
+.sliders {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+}
+.sliders .slider-each {
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+.sliders .slider-each .slider-value-wrapper {
+    display: flex;
+    align-items: center;
+}
+.sliders .slider-each .slider-value {
+    margin-left: -1rem;
+    font-weight: 500;
+}
+.sliders .slider {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: center;
+}
+.sliders .slider .mat-slider {
+    width: 100%;
+}
+.sliders .slider .slider-range-min {
+    margin-right: 1rem;
+}
+.sliders .slider .slider-range-max {
+    margin-left: 1rem;
+}
+.sliders .slider-label {
+    margin-right: 1rem;
+}
+.actions-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.actions-wrapper button {
+    box-shadow: none;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.images-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: 1rem;
+    margin-top: 0;
+}
+.left {
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.values {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 1rem;
+    text-align: center;
+    flex: 100%;
+}
+.values .value-wrapper .value-label {
+    font-size: 12px;
+}
+.values .value-wrapper .value {
+    font-weight: 500;
+}
+.cluster-analysis {
+    margin: 8px 16px;
+}
+.select-action-wrapper {
+    position: sticky;
+    bottom: -1rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background: #fff;
+    padding: 0.5rem;
+}
+.sticky-select-action {
+    position: sticky;
+    bottom: 0;
+}
+.left-right {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+.config {
+    max-width: 98%;
+    width: 900px;
+    border: 1px solid #ddd;
+    margin: 1rem auto;
+    border-radius: 0.25rem;
+}
+.tab-content {
+    width: 90%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.tab-content.calibrate {
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    flex-direction: row;
+}
+.tab-content.color-cluster {
+    max-width: 300px;
+}
+.tab-content.morph-cluster {
+    max-width: 300px;
+}
+.tab-content.measure-seed {
+    max-width: 500px;
+}
+.fields-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.fields-wrapper .fields-column {
+    width: 48%;
+}

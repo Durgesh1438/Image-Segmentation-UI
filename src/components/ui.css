@@ -1,0 +1,160 @@
+.action{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.mainui{
+  display: flex;
+  flex-direction: column;
+  
+}
+.ui-display{
+  flex:1;
+}
+.ui{
+    margin-top: 20px;
+    display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.btn1{
+    width: 150px;
+    height: 50px;
+    border: 2px solid #e9e7e7eb;
+  border-radius: 10px; 
+  padding: 10px 20px; 
+  background-color: transparent; 
+  color: #333; 
+  text-align: center; 
+  text-decoration: none;
+  display: inline-block; 
+  font-size: 16px; 
+  cursor: pointer; 
+  transition: rgb(110, 228, 110); 
+}
+
+.btn1:hover{
+  background-color: rgb(110, 228, 110); 
+  color: #333;
+}
+.btn2{
+    width: 150px;
+    height: 50px;
+    border: 2px solid #e9e7e7eb; 
+  border-radius: 10px; 
+  padding: 10px 20px; 
+  background-color: transparent; 
+  color: #333; 
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+  font-size: 16px; 
+  cursor: pointer; 
+  transition: rgb(110, 228, 110); 
+}
+
+.btn2:hover{
+  background-color: rgb(110, 228, 110); 
+  color: #333;
+}
+
+.media-upload-wrapper {
+  border: 2px solid rgb(60, 57, 57);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+.upload-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.section{
+   margin-top: 100px;
+   position: absolute;
+}
+
+.upload-wrapper input[type='file'] {
+  margin-bottom: 10px;
+}
+
+.actions-wrapper {
+  margin-top: 10px;
+}
+
+.actions-wrapper button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.camera-container {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.camera-container button {
+  background-color: #3eef91;
+  color: #fff;
+  margin-left: 10px;
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.preview img{
+  margin-right:170px;
+  margin-bottom: 100px;
+}
+
+.webcam-style{
+  border: 2px solid #007bff; 
+  border-radius: 5px; 
+  margin-bottom: 20px;
+}
+
+.imageCalibration{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-left:1200px;
+  
+}
+
+.imageCalibration img{
+  width:240px;
+  height: 180px;
+}
+
+.align-left{
+  display: flex;
+  /*position: relative;*/
+  margin-left:20px;
+  
+}
+
+.form{
+  margin-top:20px;
+}
+.refvalcls{
+  width:250px;
+}
+.button{
+  margin-top:-70px;
+  margin-left: 300px;
+  width:100px;
+}
+.values{
+  margin-top: -75px;
+  margin-left:450px;
+  position:relative;
+}

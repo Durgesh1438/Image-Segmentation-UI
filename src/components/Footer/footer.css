@@ -1,0 +1,29 @@
+.app-footer-wrapper {
+    background-color: rgb(160, 156, 156);
+    height: 80px;
+    display: flex;
+    bottom:0;
+    left:0;
+    width:100%;
+    position: relative;
+    margin-top: 445px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+    .name {
+        font-weight: bolder;
+        margin-top: 10px;
+    }
+    .copyrights {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
+        font-weight: bolder;
+        h4 {
+            margin-right: 10px;
+            font-weight: bolder;
+        }
+    }
+}
