@@ -18,8 +18,9 @@ import GenerateReport from "../reportdetails/generatereport";
 import { Checkbox } from "@mui/material";
 import Spinneroff from "../spinner/spinneroff";
 import { useUsername } from "../../globalstate";
+import { API_URL } from "../../helpers/helper";
 function Process({
-  calibrate,
+  imageSrc,
   selectedFile,
   cluster,
   minAreaValue,
@@ -37,8 +38,6 @@ function Process({
   const [excelfile3, setexcelfile3] = useState(null);
   const [selectedOptionMorph, setselectedOptionMorph] = useState(null);
   const [selectedOptionMeasure, setselectedOptionMeasure] = useState("");
-  const [checkedValuesMorph, setCheckedValuesMorph] = useState([]);
-  const [checkedValuesMeasure, setCheckedValuesMeasure] = useState([]);
   const [file3, setfile3] = useState(false);
   const [file1,setfile1]=useState(false)
   const [filename, setfilename] = useState("");
@@ -46,9 +45,9 @@ function Process({
   const [menuOpenMorph, setMenuOpenMorph] = useState(false);
   const [selectedOptionsMorph, setSelectedOptionsMorph] = useState([]);
   const [selectedOptionsMeasure, setSelectedOptionsMeasure] = useState([]);
-  const [isLoading, setisLoading] = useState(false);
   
-  const {processname,setprocessname,setManualmeasure}=useUsername()
+  
+  const {processname,setprocessname,setManualmeasure,isLoading,setisLoading}=useUsername()
   const options = [
     { label:"Area",value:"areas"}, 
     { label:"Perimeter",value:"perimeters"}, 
@@ -74,12 +73,12 @@ function Process({
   
   const handleMorphChange = (selectedOptions) => {
     const selectedValues = selectedOptions.map((option) => option.label);
-    console.log(selectedValues);
+   
     setSelectedOptionsMorph(selectedValues);
   };
 
   const handleMorphDoneClick = () => {
-    console.log(selectedOptionsMorph);
+    
     setisLoading(true)
     setProcessedImage(null);
     setprocessname(null)
@@ -100,7 +99,7 @@ function Process({
       const token = sessionStorage.getItem("access_token");
       try {
         const response = await axios.post(
-          "http://localhost:3001/morphcluster",
+          `${API_URL}/morphcluster`,
           formData,
           {
             headers: {
@@ -109,12 +108,10 @@ function Process({
             },
           }
         );
-        const { morphclusteredimg, excelpath1, excelpath2 } =
-          await response.data;
-        console.log(excelpath1, excelpath2);
-        console.log(`http://localhost:3001${morphclusteredimg}`);
+        const { morphclusteredimg, excelpath1, excelpath2 } = await response.data;
+        
         const imageResponse = await axios.get(
-          `http://localhost:3001${morphclusteredimg}`,
+          `${API_URL}${morphclusteredimg}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -123,7 +120,7 @@ function Process({
           }
         );
         const excelresponse1 = await axios.get(
-          `http://localhost:3001${excelpath1}`,
+          `${API_URL}${excelpath1}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -132,7 +129,7 @@ function Process({
           }
         );
         const excelresponse2 = await axios.get(
-          `http://localhost:3001${excelpath2}`,
+          `${API_URL}${excelpath2}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -148,8 +145,7 @@ function Process({
           type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         });
         const imageurl = URL.createObjectURL(imageResponse.data);
-        console.log(url1);
-        console.log(url2);
+        
         setfilename("morph");
         setprocessname("morph")
         setProcessedImage(imageurl);
@@ -166,7 +162,7 @@ function Process({
   };
   const handleMeasureChange = (selectedOptions) => {
     const selectedValues = selectedOptions.map((option) => option.label);
-    console.log(selectedValues);
+    
     setSelectedOptionsMeasure(selectedValues);
   };
 
@@ -180,7 +176,7 @@ function Process({
     setexcelfile3(null);
     setfile3(false);
     setfile1(false)
-    console.log(selectedOptionsMeasure);
+    
     setProcessedImage(null);
     const fetchData = async () => {
       const formData = new FormData();
@@ -190,11 +186,11 @@ function Process({
       formData.append("cluster", cluster);
       formData.append("ppmm", ppmm);
       formData.append("parameterSelection", selectedOptionsMeasure);
-      console.log(minAreaValue, maxAreaValue, selectedOptionsMeasure);
+      
       const token = sessionStorage.getItem("access_token");
       try {
         const response = await axios.post(
-          "http://localhost:3001/measurecluster",
+          `${API_URL}/measurecluster`,
           formData,
           {
             headers: {
@@ -205,9 +201,9 @@ function Process({
         );
         const { measureclusteredimg, excelpath3 } =
           await response.data;
-        console.log(`http://localhost:3001${measureclusteredimg}`);
+        
         const imageResponse = await axios.get(
-          `http://localhost:3001${measureclusteredimg}`,
+          `${API_URL}${measureclusteredimg}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -217,7 +213,7 @@ function Process({
         );
       
         const excelresponse3 = await axios.get(
-          `http://localhost:3001${excelpath3}`,
+          `${API_URL}${excelpath3}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -297,7 +293,6 @@ function Process({
     setfile1(false)
     setfile3(false)
     setexcelfile3(null);
-    console.log(minAreaValue, maxAreaValue, cluster);
     handleColorImageFetch();
   };
 
@@ -315,7 +310,7 @@ function Process({
       const token = sessionStorage.getItem("access_token");
       try {
         const response = await axios.post(
-          "http://localhost:3001/colorcluster",
+          `${API_URL}/colorcluster`,
           formData,
           {
             headers: {
@@ -326,10 +321,9 @@ function Process({
         );
         const { colorclusteredimg, excelpath1, excelpath2 } =
           await response.data;
-        console.log(excelpath1, excelpath2);
-        console.log(`http://localhost:3001${colorclusteredimg}`);
+        
         const imageResponse = await axios.get(
-          `http://localhost:3001${colorclusteredimg}`,
+          `${API_URL}${colorclusteredimg}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -338,7 +332,7 @@ function Process({
           }
         );
         const excelresponse1 = await axios.get(
-          `http://localhost:3001${excelpath1}`,
+          `${API_URL}${excelpath1}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -347,7 +341,7 @@ function Process({
           }
         );
         const excelresponse2 = await axios.get(
-          `http://localhost:3001${excelpath2}`,
+          `${API_URL}${excelpath2}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -363,8 +357,6 @@ function Process({
           type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         });
         const imageurl = URL.createObjectURL(imageResponse.data);
-        console.log(url1);
-        console.log(url2);
         setfilename("color");
         setprocessname("color")
         setProcessedImage(imageurl);
@@ -394,7 +386,7 @@ function Process({
   };
   return (
     <>
-      {calibrate && (
+      {imageSrc && (
         <section className="process">
           <div style={{marginLeft:"700px"}}>{isLoading && <Spinneroff />}</div>
           <Stack direction="row" spacing={2}>
@@ -491,3 +483,4 @@ function Process({
 }
 
 export default Process;
+

@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import Form from 'react-bootstrap/Form';
+
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
+
 import Select from '@mui/material/Select';
 import './styles.css'
 import { useUsername } from '../../globalstate';
 
-function ClusterAnalysis({ uploaded, ppmm,minAreaValue,maxAreaValue,cluster,setminAreaValue,setmaxAreaValue,setcluster}) {
+function ClusterAnalysis({imageSrc, uploaded, ppmm,minAreaValue,maxAreaValue,cluster,setminAreaValue,setmaxAreaValue,setcluster}) {
   
   const {setManualmeasure}=useUsername()
   const handleMinAreaChange = (event,value) => {
@@ -28,7 +28,7 @@ function ClusterAnalysis({ uploaded, ppmm,minAreaValue,maxAreaValue,cluster,setm
   };
 
   return (
-    <section className="cluster-analysis" style={{ display:  ppmm ? 'block' : 'none' }}>
+    <section className="cluster-analysis" style={{ display:  imageSrc ? 'block' : 'none' }}>
       <div className="sliders">
         <div className="slider-each">
           <div className="slider-value-wrapper">

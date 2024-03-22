@@ -5,20 +5,22 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 
-function Header({setloading}) {
-  const {username,setUsername,picture,setpicture}=useUsername()
+function Header() {
+  const {username,setUsername,picture,setpicture,setisLoading}=useUsername()
   const [imageError, setImageError] = useState(false)
   const navigate=useNavigate()
 
   const handlelogout=(e)=>{
     e.preventDefault()
-    
+    setisLoading(true)
     sessionStorage.removeItem('access_token')
+    setImageError(false)
+    setTimeout(()=>{
+      setisLoading(false)
+      navigate('/login')
+    },3000)
     setUsername(null)
     setpicture(null)
-    setImageError(false)
-    
-    navigate('/login')
   }
 
   const handleImageError = () => {
@@ -38,7 +40,7 @@ function Header({setloading}) {
           fontWeight:'bolder'
         }}
       >
-        Image Segmentation
+        Graceed AI
       </div>
       <div style={{display:"flex"}}>
       {picture && !imageError ? 

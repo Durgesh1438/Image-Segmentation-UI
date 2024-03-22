@@ -7,8 +7,9 @@ export const UsernameProvider = ({ children }) => {
   const [picture,setpicture]=useState(null)
   const [processname,setprocessname]=useState(null)
   const [manualmeasure,setManualmeasure]=useState(false)
+  const [isLoading,setisLoading]=useState(false)
   return (
-    <UsernameContext.Provider value={{ username, setUsername,picture,setpicture,processname,setprocessname,manualmeasure,setManualmeasure }}>
+    <UsernameContext.Provider value={{ username, setUsername,picture,setpicture,processname,setprocessname,manualmeasure,setManualmeasure,isLoading,setisLoading }}>
       {children}
     </UsernameContext.Provider>
   );

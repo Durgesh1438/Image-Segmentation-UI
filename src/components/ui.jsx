@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import {   useRef, useState } from "react";
 import {
@@ -6,7 +7,7 @@ import {
   Button,
   Tooltip,
 } from "react-bootstrap";
-
+import { API_URL } from "../helpers/helper";
 import Webcam from "react-webcam";
 import { IoCameraSharp } from "react-icons/io5";
 import { MdFileUpload } from "react-icons/md";
@@ -22,7 +23,7 @@ import Spinoff from "./spinner/spinner";
 import {useUsername} from './../globalstate'
 function Home() {
   const [FileUpload, setFileUpload] = useState(false);
-  const [loading,setloading]=useState(false)
+ 
   const [minAreaValue, setminAreaValue] = useState(0);
   const [maxAreaValue, setmaxAreaValue] = useState(1000);
   const [cluster, setcluster] = useState(2);
@@ -37,10 +38,55 @@ function Home() {
   const [ppmm, setPpmm] = useState(null);
   const [ProcessedImage, setProcessedImage] = useState(null);
   const [error,seterror]=useState("")
+  const [loading,setloading]=useState(false)
   const {username,manualmeasure,setManualmeasure}=useUsername()
-  
-  console.log("home state re-rendered");
-  console.log(username)
+  const [lines, setLines] = useState([]);
+  const [startPoint, setStartPoint] = useState(null);
+  const [length, setLength] = useState(null);
+  const canvasRef = useRef(null);
+
+
+  const startLine = (e) => {
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    setStartPoint([x, y]);
+  };
+
+  const drawLine = (e) => {
+    if (!startPoint) return;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const newLines = [[startPoint, [x, y]]];
+    setLines(newLines);
+    const length = calculateLength(startPoint, [x, y]);
+    setLength(length);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    newLines.forEach(line => {
+      ctx.beginPath();
+      ctx.moveTo(line[0][0], line[0][1]);
+      ctx.lineTo(line[1][0], line[1][1]);
+      ctx.strokeStyle = 'blue';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    });
+  };
+
+  const endLine = () => {
+    if (!startPoint) return;
+    setStartPoint(null);
+  };
+
+  const calculateLength = (startPoint, endPoint) => {
+    const [x1, y1] = startPoint;
+    const [x2, y2] = endPoint;
+    return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2) / ppmm;
+  };
+ 
   const handleCameraClick = (e) => {
     e.preventDefault();
     setCamUpload(true);
@@ -49,12 +95,12 @@ function Home() {
     setProcessedImage(null);
     setCalibrate(false);
     setPpmm(null);
-    
+    setManualmeasure(false)
   };
 
 
   const capture = () => {
-    
+    setManualmeasure(false)
     const imageSrc = webcamRef.current.getScreenshot();
     const sanitizedImageSrc = sanitizeBase64(imageSrc);
     const blob = base64ToBlob(sanitizedImageSrc);
@@ -69,7 +115,7 @@ function Home() {
       //console.log(token);
       try {
         const response = await axios.post(
-          "http://localhost:3001/upload",
+          `${API_URL}/upload`,
           formData,
           {
             headers: {
@@ -79,7 +125,7 @@ function Home() {
           }
         );
         //const { ppm, filename } = response.data;
-        console.log(response.data);
+        
         setloading(false)
       } catch (error) {
         console.error("Error uploading image:", error);
@@ -99,11 +145,11 @@ function Home() {
 
   const handleFileUpload = (e) => {
     e.preventDefault();
-    
+    setManualmeasure(false)
     setCoinDiaEntry("");
     setSelectedFile(null);
     setImageSrc(null);
-    setPpmm(false);
+    
     setProcessedImage(null);
     setCalibrate(false);
     setCamUpload(false);
@@ -117,7 +163,7 @@ function Home() {
   };
 
   const handleFileSelect = (event) => {
-  
+    setManualmeasure(false)
     const file = event.target.files[0];
     setUploadedImg(true);
     setSelectedFile(file);
@@ -126,7 +172,7 @@ function Home() {
   };
 
   const toggleUpload = () => {
-  
+    setManualmeasure(false)
     if (!uploadedImg || !selectedFile){
       seterror("Please upload the file")
       return;
@@ -145,7 +191,7 @@ function Home() {
       //console.log(token);
       try {
         const response = await axios.post(
-          "http://localhost:3001/upload",
+          `${API_URL}/upload`,
           formData,
           {
             headers: {
@@ -155,7 +201,7 @@ function Home() {
           }
         );
         //const { ppm, filename } = response.data;
-        console.log(response.data);
+        
         setloading(false)
       } catch (error) {
         console.error("Error uploading image:", error);
@@ -176,15 +222,15 @@ function Home() {
 
   
   const handleProcessedImageUpdate = (imageUrl) => {
-    console.log("Updating processed image:", imageUrl);
+    
     setProcessedImage(imageUrl);
 
   };
   
-  console.log("Current processed image:", ProcessedImage);
+  
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-  
+    setManualmeasure(false)
     setloading(true)
     setCalibrate(true);
     setProcessedImage(null);
@@ -192,14 +238,14 @@ function Home() {
     const fetchData = async () => {
       const formData = new FormData();
       setProcessedImage(null);
-      console.log(CoinDiaEntry)
+      
       formData.append("image",selectedFile)
       formData.append("CoinDiaEntry", CoinDiaEntry);
       const token = sessionStorage.getItem("access_token");
-      console.log(token);
+      
       try {
         const response = await axios.post(
-          "http://localhost:3001/calibrate",
+          `${API_URL}/calibrate`,
           formData,
           {
             headers: {
@@ -208,18 +254,17 @@ function Home() {
             },
           }
         );
-        console.log(response)
+        
         const { ppm, filename } = response.data;
-        console.log(response.data);
-        console.log(`http://localhost:3001${filename}`)
-        const imageResponse = await axios.get(`http://localhost:3001${filename}`, {
+        
+        const imageResponse = await axios.get(`${API_URL}${filename}`, {
          headers: {
          Authorization: `Bearer ${token}`,
           },
           responseType:'blob'
         });
         const imageurl=URL.createObjectURL(imageResponse.data)
-        console.log("imageurl:",imageurl)
+       
        
         setProcessedImage(imageurl)
         setPpmm(ppm);
@@ -235,7 +280,10 @@ function Home() {
     e.preventDefault();
     Calibrate(true);
   };
- 
+  const handleManualMeasure=(e)=>{
+     setManualmeasure(!manualmeasure)
+     setLength(null)
+  }
  
   return (
     
@@ -328,11 +376,28 @@ function Home() {
                 </div>
               )}
             </div>
-            
             <div>
-              {ppmm && (
+              {
+                imageSrc && (
+                  <div style={{display:"flex",marginLeft:"50px",marginTop:"20px"}}>
+                     <Button className="manual-measure" onClick={handleManualMeasure}>Manual Measure</Button>
+                    {(manualmeasure||length) &&
+                     (<div style={{marginLeft:"40px",marginTop:"23px"}}>
+                     <div className="value-label">
+                          Measured Length in mm
+                          </div>
+                          <div className="value">{length?length.toFixed(2):0}</div>
+                     </div>)
+                    }
+                  </div>
+                )
+              }
+            </div>
+            <div>
+              {imageSrc && (
                 <div className="analysis">
                   <ClusterAnalysis
+                    imageSrc={imageSrc}
                     uploaded={uploadedImg}
                     ppmm={ppmm}
                     minAreaValue={minAreaValue}
@@ -344,7 +409,7 @@ function Home() {
                     
                   />
                   <Process
-                    calibrate={Calibrate}
+                    imageSrc={imageSrc}
                     selectedFile={selectedFile}
                     cluster={cluster}
                     minAreaValue={minAreaValue}
@@ -363,6 +428,8 @@ function Home() {
               <div className="imageCalibration">
                 <h5 style={{fontWeight:"bolder"}}>Selected Image</h5>
                 <img src={imageSrc} alt="Uploaded" />
+                {manualmeasure &&
+                (<canvas ref={canvasRef} width={280} height={200} onMouseDown={startLine} onMouseMove={drawLine} onMouseUp={endLine} className="canvas"  />)}
                 {ProcessedImage && (
                   <div style={{marginTop:"30px"}}>
                     <h5 style={{fontWeight:"bolder"}}>Processed Image</h5>
@@ -377,7 +444,7 @@ function Home() {
           </div>
         </div>
         {loading?<Spinoff/>:""}
-        <Footer/>
+        {imageSrc&&<Footer/>}
       </div>
       
     </div>
