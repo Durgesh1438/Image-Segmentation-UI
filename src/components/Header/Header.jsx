@@ -40,7 +40,7 @@ function Header() {
           fontWeight:'bolder'
         }}
       >
-        Graceed AI
+        Image Segmentation
       </div>
       <div style={{display:"flex"}}>
       {picture && !imageError ? 
