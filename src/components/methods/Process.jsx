@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import Button from "@mui/material/Button";
+import {Button} from 'react-bootstrap';
 import Stack from "@mui/material/Stack";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -390,9 +390,9 @@ function Process({
         <section className="process">
           <div style={{marginLeft:"700px"}}>{isLoading && <Spinneroff />}</div>
           <Stack direction="row" spacing={2}>
-            <Button onClick={handleColor} style={{fontWeight:"bolder"}}>Color cluster</Button>
+            <Button onClick={handleColor} >Color cluster</Button>
             <Stack direction="row" spacing={2}>
-              <Button onClick={handleMorph} style={{fontWeight:"bolder"}} >Morph cluster</Button>
+              <Button onClick={handleMorph}  >Morph cluster</Button>
               {Morph && (
                 <FormControl>
                   <div style={{ display: "flex" }}>
@@ -405,19 +405,19 @@ function Process({
                       menuPlacement="top"
                       styles={customStyles}
                     />
-                    <Button onClick={handleMorphDoneClick} style={{fontWeight:"bolder"}}>Done</Button>
+                    <Button onClick={handleMorphDoneClick} style={{marginLeft:"10px",marginTop:"-1px",width:"100px"}}>Done</Button>
                   </div>
                 </FormControl>
               )}
             </Stack>
             <Stack direction="row" spacing={2}>
-              <Button onClick={handleMeasure} style={{fontWeight:"bolder"}} >Measure Seed/Grain</Button>
+              <Button onClick={handleMeasure}  >Measure Seed/Grain</Button>
             </Stack>
             
           </Stack>
           {(file1 || file3) && (
             <div className="excelfiles">
-              <h5 style={{fontWeight:"bolder"}}>Generated files after the processes</h5>
+              <h5 style={{fontWeight:"500"}}>Generated files after the processes</h5>
               <>
                 <div
                   style={{ display: "flex", marginTop: "20px", gap: "40px" }}
@@ -426,38 +426,38 @@ function Process({
                     {/* Excel file icon */}
                     <a
                       href={excelfile1}
-                      download={`${filename}_clustered1.xlsx`}
+                      download={filename==='color'?'ColorCluster_ID.xlsx':'MorphCluster_ID.xlsx'}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ fontSize: "20px",fontWeight:'bolder' }}
+                      style={{ fontSize: "20px" }}
                     >
                       <FaFileExcel style={{ fontSize: "40px" }} />
-                      {filename}_clustered1.xlsx
+                      {filename==='color'?'ColorCluster_ID.xlsx':'MorphCluster_ID.xlsx'}
                     </a>
                   </div>
                   <div style={{display:file3?"none":"block"}}>
                     {/* Excel file icon */}
                     <a
                       href={excelfile2}
-                      download={`${filename}_clustered2.xlsx`}
+                      download={filename==='color'?'ColorCluster_Summary.xlsx':'MorphCluster_Summary.xlsx'}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ fontSize: "20px",fontWeight:'bolder' }}
+                      style={{ fontSize: "20px"}}
                     >
                       <FaFileExcel style={{ fontSize: "40px" }} />
-                      {filename}_clustered2.xlsx
+                      {filename==='color'?'ColorCluster_Summary.xlsx':'MorphCluster_Summary.xlsx'}
                     </a>
                   </div>
                   <div style={{ display: file3 ? "block" : "none" }}>
                     <a
                       href={excelfile3}
-                      download="grains.xlsx"
+                      download="Measurement.xlsx"
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ fontSize: "20px",fontWeight:'bolder' }}
+                      style={{ fontSize: "20px"}}
                     >
                       <FaFileExcel style={{ fontSize: "40px" }} />
-                      grains.xlsx
+                      Measurement.xlsx
                     </a>
                   </div>
                 </div>

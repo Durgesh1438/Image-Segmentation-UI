@@ -135,7 +135,7 @@ function Admin() {
       <div className="header">
         <div className="element">ADMIN</div>
         <div className="button">
-        <Button onClick={handleLogout}>LOGOUT</Button>
+        <Button onClick={handleLogout} className="btn-admin">LOGOUT</Button>
         </div>
       </div>
       {userData && (
@@ -189,7 +189,7 @@ function Admin() {
           </div>
           <div className="manipulation">
             <div className="search">
-              <span style={{ marginTop: "6px", fontWeight: "bolder" }}>
+              <span style={{ marginTop: "6px" }}>
                 EMAIL :
               </span>
               <Input
@@ -239,7 +239,7 @@ function Admin() {
             </table>
           </div>
           <div className="select">
-            <label style={{ fontWeight: "bolder" }}>SELECT PACK</label>
+            <label style={{ fontWeight: "450" }}>SELECT PACK</label>
             <Select
               value={selectedOption}
               options={options}

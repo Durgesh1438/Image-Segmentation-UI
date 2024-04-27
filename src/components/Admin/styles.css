@@ -4,7 +4,6 @@
   }
   .label{
     margin-left: 705px;
-    font-weight: bolder;
     color: blue;
   }
   .user-data button{
@@ -29,12 +28,14 @@
     flex-direction: row;
   }
   .button{
-    margin-top: -5px;
+    margin-top: 0px;
     margin-left:550px;
-    font-weight: bolder;
   }
   .button:hover{
     background-color: #3eef91;
+  }
+  .btn-admin{
+    color: black;
   }
   .search{
     display: flex;
@@ -50,9 +51,10 @@
     display: flex;
     padding: 20px;
   }
+  
   .element{
     margin-left:698px;
-    font-weight: bolder;
+    
   }
   .admin-table {
     width: 100%;
@@ -77,7 +79,6 @@
     overflow: hidden; 
     text-overflow: ellipsis;
     height: 60px;
-    
   }
   .select{
     margin-left: 60px;

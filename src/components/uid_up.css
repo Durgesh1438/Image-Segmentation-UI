@@ -10,7 +10,7 @@
   padding: 20px;
 }
 .dialabel{
-  font-weight: bolder;
+  font-weight: 500;
 }
 .left-container {
   flex: 1;
@@ -97,10 +97,12 @@ margin-left: 570px;
   margin-top: 20px;
   margin-left: -30px;
   height: 40px;
+  background-color: white;
+  color: black;
 }
 
 .btn-primary:hover{
-  background-color: #3eef91;
+  background-color: rgb(97, 231, 67);
   color:black;
 }
 
@@ -142,7 +144,7 @@ margin-left: 570px;
 }
 
 .camera-container button{
-  background-color: #3eef91;
+  background-color: rgb(97, 231, 67);
   color: #fff;
   margin-left: 10px;
   border: 2px solid white;
@@ -167,6 +169,9 @@ margin-left: 570px;
   margin-top: 15px;
   margin-left: 45px;
 }
+.value-label{
+  font-weight: 500;
+}
 
 .refvalcls {
   width: 250px;
@@ -183,9 +188,7 @@ margin-left: 570px;
 .values {
   margin-top: 10px;
 }
-.value-label{
-  font-weight: bolder;
-}
+
 .analysis {
   margin-top: 20px;
   margin-left:-30px;
@@ -196,7 +199,7 @@ margin-left: 570px;
   border-radius: 7px;
 }
 .manual-measure:hover{
-  background-color: #3eef91;
+  background-color: rgb(97, 231, 67);
   color:black;
 }
 
@@ -207,8 +210,8 @@ margin-left: 570px;
 }
 
 .imageCalibration img{
-  width:280px;
-  height: 200px;
+  width:300px;
+  height: 300px;
 }
 
 .button-calibrate{
@@ -216,10 +219,22 @@ margin-left: 570px;
   height: 49px;
   width: 147px;
   margin-left: 29px;
-  border-radius: 7px 
+  border-radius: 7px ;
+  background-color: white;
+  color: black;
+}
+
+.button-calibrate:disabled{
+  margin-top: 24px;
+  height: 49px;
+  width: 147px;
+  margin-left: 29px;
+  border-radius: 7px ;
+  background-color: white;
+  color: black;
 }
 
 .button-calibrate:hover{
-  background-color: #3eef91;
+  background-color: rgb(97, 231, 67);
   color:black;
 }

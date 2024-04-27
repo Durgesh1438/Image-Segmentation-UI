@@ -32,8 +32,8 @@ function ClusterAnalysis({imageSrc, uploaded, ppmm,minAreaValue,maxAreaValue,clu
       <div className="sliders">
         <div className="slider-each">
           <div className="slider-value-wrapper">
-            <span style={{fontWeight:"bolder"}}>Minimum Contour Area</span>
-            <span style={{fontWeight:"bolder"}}> {minAreaValue}</span>
+            <span style={{fontWeight:"500"}}>Minimum Contour Area</span>
+            <span style={{marginLeft:"10px"}}> {minAreaValue}</span>
           </div>
           <Box sx={{ width: 400 }}>
              <Slider size='medium' min={0} max={1000} onChange={handleMinAreaChange} aria-label="Default" valueLabelDisplay="auto" />
@@ -41,14 +41,14 @@ function ClusterAnalysis({imageSrc, uploaded, ppmm,minAreaValue,maxAreaValue,clu
         </div>
         <div className="slider-each">
           <div className="slider-value-wrapper">
-            <span style={{fontWeight:"bolder"}}>Maximum Contour Area</span>
-            <span style={{fontWeight:"bolder"}}> {maxAreaValue}</span>
+            <span style={{fontWeight:"500"}}>Maximum Contour Area</span>
+            <span style={{marginLeft:"10px"}}> {maxAreaValue}</span>
           </div>
           <Box sx={{width:400}}>
               <Slider defaultValue={1000} onChange={handleMaxAreaChange} min={1000} max={5000} aria-label="Default" valueLabelDisplay="auto" />
           </Box>
         </div>
-          <InputLabel id="demo-simple-select-label" style={{fontFamily:"'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",fontWeight:"bolder"}}>Cluster Size</InputLabel>
+          <InputLabel id="demo-simple-select-label" style={{fontWeight:"bolder"}} >Cluster Size</InputLabel>
              <Select
                 labelId="demo-simple-select-label"
                id="demo-simple-select"

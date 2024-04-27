@@ -18,6 +18,7 @@ const Subscribe = () => {
   const [loading,setisLoading]=useState(false)
   const [Razorpay] = useRazorpay();
   const [freetrail,setFreetrail]=useState(false)
+  const [subscribe,setSubscribe]=useState(false)
   const [error,seterror]=useState(null)
   const navigate=useNavigate()
   const {setpicture}=useUsername()
@@ -34,6 +35,14 @@ const Subscribe = () => {
 
   const handlePlanChange = (selectedOption) => {
     setSelectedPlan(selectedOption.value);
+    if(selectedOption.value==="7 days trial"){
+      setFreetrail(true)
+      setSubscribe(false)
+    }
+    else{
+      setFreetrail(false)
+      setSubscribe(true)
+    }
     // Calculate amount based on selected plan
     if (selectedOption.value === "1 day") {
       setAmount(50); // Set amount for 1 day subscription
@@ -152,7 +161,7 @@ const Subscribe = () => {
           key: 'rzp_test_ovVodcPR2JciPd', // Replace with your Razorpay key
           amount: data.amount,
           currency: "INR",
-          name: "Carey John private ltd",
+          name: "Durgesh Kovvuri",
           description: "Subscription Payment",
           order_id: data.id,
           handler: async (response) => {
@@ -224,12 +233,20 @@ const Subscribe = () => {
   };
 
   return (
+    <div>
+    <div>
+        <div className="login-header">
+          <div className="login-title">
+            <span className="spanelement">Image Segmentation</span>
+          </div>
+        </div>
+      </div>
     <div className="main">
       <div className="subscription-box">
         <div>
-          <h5>choose subscription plan</h5>
+          <span style={{fontWeight:"500"}}>choose subscription plan</span>
         </div>
-        <div>
+        <div style={{marginTop:"10px"}}>
           <Select
             value={options.filter((option) => option.value === selectedPlan)}
             onChange={handlePlanChange}
@@ -261,9 +278,9 @@ const Subscribe = () => {
           />
         </div>
         <div>
-          {amount >0 && (
+          {(amount >0 && subscribe)&& (
             <div className="payment-details">
-              <h6 style={{fontWeight:"bold"}}>Amount to pay: ₹{amount}</h6>
+              <span style={{fontWeight:"500"}}>Amount to pay: ₹{amount}</span>
               <button onClick={handlePayment}>Pay Now</button>
             </div>
            )
@@ -273,6 +290,7 @@ const Subscribe = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

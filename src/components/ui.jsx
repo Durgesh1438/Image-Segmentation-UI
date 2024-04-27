@@ -21,6 +21,7 @@ import { base64ToBlob, sanitizeBase64 } from "../helpers/helper";
 import Spinoff from "./spinner/spinner";
 
 import {useUsername} from './../globalstate'
+import Spinneroff from "./spinner/spinneroff";
 function Home() {
   const [FileUpload, setFileUpload] = useState(false);
  
@@ -38,54 +39,9 @@ function Home() {
   const [ppmm, setPpmm] = useState(null);
   const [ProcessedImage, setProcessedImage] = useState(null);
   const [error,seterror]=useState("")
-  const [loading,setloading]=useState(false)
-  const {username,manualmeasure,setManualmeasure}=useUsername()
-  const [lines, setLines] = useState([]);
-  const [startPoint, setStartPoint] = useState(null);
-  const [length, setLength] = useState(null);
-  const canvasRef = useRef(null);
-
-
-  const startLine = (e) => {
-    const canvas = canvasRef.current;
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    setStartPoint([x, y]);
-  };
-
-  const drawLine = (e) => {
-    if (!startPoint) return;
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const newLines = [[startPoint, [x, y]]];
-    setLines(newLines);
-    const length = calculateLength(startPoint, [x, y]);
-    setLength(length);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    newLines.forEach(line => {
-      ctx.beginPath();
-      ctx.moveTo(line[0][0], line[0][1]);
-      ctx.lineTo(line[1][0], line[1][1]);
-      ctx.strokeStyle = 'blue';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-    });
-  };
-
-  const endLine = () => {
-    if (!startPoint) return;
-    setStartPoint(null);
-  };
-
-  const calculateLength = (startPoint, endPoint) => {
-    const [x1, y1] = startPoint;
-    const [x2, y2] = endPoint;
-    return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2) / ppmm;
-  };
+  //const [loading,setloading]=useState(false)
+  const {username,manualmeasure,setManualmeasure,loading,setloading,login}=useUsername()
+  
  
   const handleCameraClick = (e) => {
     e.preventDefault();
@@ -267,7 +223,7 @@ function Home() {
        
        
         setProcessedImage(imageurl)
-        setPpmm(ppm);
+        setPpmm(ppm.toFixed(2));
         setloading(false)
       } catch (error) {
         console.error("Error uploading image:", error);
@@ -280,10 +236,6 @@ function Home() {
     e.preventDefault();
     Calibrate(true);
   };
-  const handleManualMeasure=(e)=>{
-     setManualmeasure(!manualmeasure)
-     setLength(null)
-  }
  
   return (
     
@@ -307,9 +259,9 @@ function Home() {
             </div>
             {FileUpload && (
               <div className="media-upload-wrapper">
-                <h5 style={{fontWeight:"bolder"}}>Choose file to upload</h5>
+                <h5 >Choose file to upload</h5>
                 <div className="upload-wrapper">
-                  <input type="file" style={{fontWeight:"bolder"}} onChange={handleFileSelect} />
+                  <input type="file" accept="image/*"   onChange={handleFileSelect} />
                   {error&&<div style={{color:"red",marginTop:"10px"}}>{error}</div>}
                   <Button onClick={toggleUpload} className="btn-primary">
                     Upload
@@ -376,23 +328,10 @@ function Home() {
                 </div>
               )}
             </div>
-            <div>
-              {
-                imageSrc && (
-                  <div style={{display:"flex",marginLeft:"50px",marginTop:"20px"}}>
-                     <Button className="manual-measure" onClick={handleManualMeasure}>Manual Measure</Button>
-                    {(manualmeasure||length) &&
-                     (<div style={{marginLeft:"40px",marginTop:"23px"}}>
-                     <div className="value-label">
-                          Measured Length in mm
-                          </div>
-                          <div className="value">{length?length.toFixed(2):0}</div>
-                     </div>)
-                    }
-                  </div>
-                )
-              }
-            </div>
+            {loading?
+              <div style={{marginLeft:"700px"}}>
+            <Spinneroff/>
+            </div>:""}
             <div>
               {imageSrc && (
                 <div className="analysis">
@@ -426,13 +365,12 @@ function Home() {
           <div className="right-container">
             {imageSrc && (
               <div className="imageCalibration">
-                <h5 style={{fontWeight:"bolder"}}>Selected Image</h5>
+                <h5>Selected Image</h5>
                 <img src={imageSrc} alt="Uploaded" />
-                {manualmeasure &&
-                (<canvas ref={canvasRef} width={280} height={200} onMouseDown={startLine} onMouseMove={drawLine} onMouseUp={endLine} className="canvas"  />)}
+                
                 {ProcessedImage && (
                   <div style={{marginTop:"30px"}}>
-                    <h5 style={{fontWeight:"bolder"}}>Processed Image</h5>
+                    <h5 >Processed Image</h5>
                     <img
                       src={ProcessedImage}
                       alt="Processed"
@@ -443,7 +381,6 @@ function Home() {
             )}
           </div>
         </div>
-        {loading?<Spinoff/>:""}
         {imageSrc&&<Footer/>}
       </div>
       

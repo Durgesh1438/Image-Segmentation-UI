@@ -1,15 +1,71 @@
-.btn{
-    color:white;
-   margin-right: 10px;
-   margin-top:25px;
-    height:30px;
-    font-weight: bolder;
-   
+.header-ui{
+    display:flex;
+    background-color: grey;
+    justify-content: space-between;
 }
 
-.btn:hover{
-    background-color: rgb(97, 231, 67);
-    
-}
+.left-section {
+    flex: 1;
+    margin-left: 5px;
+  }
+  
+  .middle-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .right-section {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .subscription-info {
+    display: flex;
+    flex-direction: column; /* Arranges subscription info vertically */
+  }
+  
+  .subscription-info span {
+    margin-bottom: 5px; 
+    color: white;/* Margin between subscription info items */
+  }
+  
+  .subscription-info span:first-child {
+    margin-top: 5px; /* Top margin for the first item */
+  }
+
+  .middle-section .app-title {
+    display: flex;
+    align-items: center; /* Aligns children vertically */
+  }
+  .spanele{
+    font-size: 1.5rem;
+    color: white;  
+   }
+  .middle-section .app-title .logo {
+    width: 50px; /* Adjust width of the logo */
+    height: 50px; /* Adjust height of the logo */
+    margin-right: 5px; /* Margin between logo and text */
+  }
+
+  .right-section .btn-title {
+    margin-left: 20px;
+    margin-right: 10px;
+     /* Margin between user picture and logout button */
+  }
+  
+  .right-section .btn-title .btnheader {
+    margin-top: 25px;
+    cursor: pointer; /* Cursor style */
+   
+  }
+  
+  .right-section .btn-title .btnheader:hover {
+     /* Background color when hovered */
+     background-color: rgb(97, 231, 67);
+  }
+
 
 
